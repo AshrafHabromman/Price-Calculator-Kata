@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Price_Calculator_Kata.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,18 +7,24 @@ using System.Threading.Tasks;
 
 namespace Price_Calculator_Kata
 {
-    public class ProductPrinter
+    public class ProductPrinterWithTax : IProductPrinter
     {
-        private Product product { get; set; }
+        public IProduct product { get; set; }
+        public ITax tax { get; set; }
 
-        public ProductPrinter(Product product) { 
+        public ProductPrinterWithTax(IProduct product, ITax tax)
+        {
             this.product = product;
+            this.tax = tax;
         }
 
         public void PrintPrice()
         {
-            Console.Write($"Product price reported as ${product.price:#.##} before tax " +
-                $"and ${product.CalculatePriceWithTax():#.##} after {Product.taxPercentage * 100f}% tax.");
+            float price = product.price;
+            float totalPrice = tax.CalculateTax(price) + price;
+
+            Console.Write($"Product price reported as ${price:#.##} before tax " +
+                $"and ${totalPrice:#.##} after {tax.taxPercentage * 100f}% tax.");
         }
     }
 }

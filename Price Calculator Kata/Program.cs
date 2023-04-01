@@ -1,10 +1,17 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
+
+// See https://aka.ms/new-console-template for more information
 using Price_Calculator_Kata;
+using Price_Calculator_Kata.Product;
+using Price_Calculator_Kata.Tax;
 
-Console.WriteLine("Hello, World!");
-Product p = new Product("lol", 1234, 25.2356f);
+Console.Write("Please input the tax percentage you would like: ");
 
-Product.taxPercentage = 0.2f;
-ProductPrinter productPrinter = new ProductPrinter(p);
+double taxPercentage = Convert.ToDouble(Console.ReadLine());
+ITax taxCalculator = new TaxCalculator((float)taxPercentage);
+IProduct product = new Product("Potato", 1234, 20.25f);
+
+IProductPrinter productPrinter = new ProductPrinterWithTax(product, taxCalculator);
+
 productPrinter.PrintPrice();
 
