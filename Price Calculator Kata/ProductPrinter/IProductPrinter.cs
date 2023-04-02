@@ -1,6 +1,6 @@
 ﻿using Price_Calculator_Kata.Product;
 
-namespace Price_Calculator_Kata
+namespace Price_Calculator_Kata.ProductPrinter
 {
     public interface IProductPrinter
     {
