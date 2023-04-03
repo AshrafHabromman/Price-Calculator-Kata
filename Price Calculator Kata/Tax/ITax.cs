@@ -11,4 +11,4 @@ namespace Price_Calculator_Kata
         float taxPercentage { get; set; }
         public float CalculateTax(float price);
     }
-}
+}   

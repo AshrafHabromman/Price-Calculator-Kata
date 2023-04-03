@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Price_Calculator_Kata
+namespace Price_Calculator_Kata.Discount
 {
-    public class Discount: IDiscount
+    public class Discount : IDiscount
     {
         public float discountPercentage { get; set; }
-        public Discount(float disconutPercentage) 
+        public Discount(float disconutPercentage)
         {
-            this.discountPercentage = disconutPercentage;
+            discountPercentage = disconutPercentage;
         }
-        public float CalculateDiscount(float price)
+        public virtual float CalculateDiscount(float price)
         {
             return discountPercentage * price;
         }

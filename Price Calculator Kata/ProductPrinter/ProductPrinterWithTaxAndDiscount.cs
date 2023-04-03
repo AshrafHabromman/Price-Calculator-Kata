@@ -1,4 +1,5 @@
-﻿using Price_Calculator_Kata.Product;
+﻿using Price_Calculator_Kata.Discount;
+using Price_Calculator_Kata.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
