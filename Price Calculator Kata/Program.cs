@@ -13,10 +13,13 @@ Console.Write("Please enter the discount percentage you would like: ");
 double discountPercentage = Convert.ToDouble(Console.ReadLine());
 
 ITax taxCalculator = new TaxCalculator((float)taxPercentage);
-IDiscount discount = new SpecialDiscount((float)discountPercentage, 0.07f);
+float upcDiscount = 0.07f;
+IDiscount discount = new Discount((float)discountPercentage, true);
+IDiscount specialUPCDiscount = new SpecialUPCDiscount(1234, (float)upcDiscount, true);
 IProduct product = new Product("Potato", 1234, 20.25f);
-
-IProductPrinter productPrinter = new ProductPrinterWithTaxAndDiscount(product, taxCalculator, discount);
+List<IDiscount> discounts = new List<IDiscount>();
+discounts.Add(discount);
+discounts.Add(specialUPCDiscount);
+IProductPrinter productPrinter = new ProductWithTaxAndDiscountsPrinter(product, taxCalculator, discounts);
 
 productPrinter.PrintPrice();
-

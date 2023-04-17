@@ -9,9 +9,11 @@ namespace Price_Calculator_Kata.Discount
     public class Discount : IDiscount
     {
         public float discountPercentage { get; set; }
-        public Discount(float disconutPercentage)
+        public bool isBeforeTax { get; set; }
+        public Discount(float disconutPercentage, bool isBeforeTax)
         {
-            discountPercentage = disconutPercentage;
+            this.discountPercentage = disconutPercentage;
+            this.isBeforeTax = isBeforeTax;
         }
         public virtual float CalculateDiscount(float price)
         {

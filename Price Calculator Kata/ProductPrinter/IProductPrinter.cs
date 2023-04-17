@@ -1,4 +1,5 @@
 ﻿using Price_Calculator_Kata.Product;
+using Price_Calculator_Kata.ProductPriceCalculator;
 
 namespace Price_Calculator_Kata.ProductPrinter
 {
