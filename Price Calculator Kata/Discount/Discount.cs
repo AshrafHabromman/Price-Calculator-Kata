@@ -17,7 +17,8 @@ namespace Price_Calculator_Kata.Discount
         }
         public virtual float CalculateDiscount(float price)
         {
-            return discountPercentage * price;
+            float discountAmount = discountPercentage * price;
+            return discountAmount.Round(2);
         }
     }
 }

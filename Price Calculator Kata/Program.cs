@@ -14,12 +14,14 @@ double discountPercentage = Convert.ToDouble(Console.ReadLine());
 
 ITax taxCalculator = new TaxCalculator((float)taxPercentage);
 float upcDiscount = 0.07f;
-IDiscount discount = new Discount((float)discountPercentage, true);
+IDiscount discount = new Discount((float)discountPercentage, false);
 IDiscount specialUPCDiscount = new SpecialUPCDiscount(1234, (float)upcDiscount, true);
 IProduct product = new Product("Potato", 1234, 20.25f);
-List<IDiscount> discounts = new List<IDiscount>();
-discounts.Add(discount);
-discounts.Add(specialUPCDiscount);
+List<IDiscount> discounts = new List<IDiscount>
+{
+    discount,
+    specialUPCDiscount
+};
 IProductPrinter productPrinter = new ProductWithTaxAndDiscountsPrinter(product, taxCalculator, discounts);
 
 productPrinter.PrintPrice();

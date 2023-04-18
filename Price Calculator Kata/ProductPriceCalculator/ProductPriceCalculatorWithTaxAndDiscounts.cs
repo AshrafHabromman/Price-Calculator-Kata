@@ -34,18 +34,19 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
                     discountsAmount += discounts[i].CalculateDiscount(product.price);
                 }
             }
-            return discountsAmount;
+            return discountsAmount.Round(2);
         }
         public float CalculatePrice()
         {
             float discountsBeforeTax = CalculateDiscounts(product.price, true);
 
-            float price = product.price - discountsBeforeTax;
+            float price = (product.price - discountsBeforeTax).Round(2);
             float taxAmount = tax.CalculateTax(price);
 
             float discountsAfterTax = CalculateDiscounts(price, false);
 
-            return price + taxAmount - discountsAfterTax;
+            float finalPrice = price + taxAmount - discountsAfterTax;
+            return finalPrice.Round(2);
         }
     }
 }

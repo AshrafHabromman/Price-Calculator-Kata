@@ -17,8 +17,7 @@ namespace Price_Calculator_Kata.Product
         {
             this.name = name;
             this.UPC = UPC;
-            //this.price = (float)Decimal.Round(((decimal)price), 2);
-            this.price = (float)Math.Round(price, 2);
+            this.price = price.Round(2);
         }
 
     }
