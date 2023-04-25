@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Price_Calculator_Kata.ProductPrinter
 {
-    internal interface IProductWithExpensesPrinter
+    public interface IProductWithExpensesPrinter
     {
+
     }
 }

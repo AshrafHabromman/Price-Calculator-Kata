@@ -4,7 +4,7 @@ namespace Price_Calculator_Kata.Tax
     public class TaxCalculator: ITax
     {
         public float taxPercentage { get; set; }
-
+        public float taxAmount { get; set; }
         public TaxCalculator(float taxPercentage)
         {
             this.taxPercentage = taxPercentage;
@@ -12,8 +12,8 @@ namespace Price_Calculator_Kata.Tax
 
         public float CalculateTax(float price) 
         {
-            float taxAmount = this.taxPercentage * price;
-            return taxAmount.Round(2);
+            this.taxAmount = (this.taxPercentage * price).Round(2);
+            return this.taxAmount;
         }  
     }
 }

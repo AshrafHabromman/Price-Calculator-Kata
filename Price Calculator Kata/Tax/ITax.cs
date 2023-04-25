@@ -9,6 +9,7 @@ namespace Price_Calculator_Kata
     public  interface ITax
     {
         float taxPercentage { get; set; }
+        public float taxAmount { get; set; }
         public float CalculateTax(float price);
     }
 }   

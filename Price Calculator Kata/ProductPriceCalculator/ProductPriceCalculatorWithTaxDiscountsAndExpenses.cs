@@ -19,7 +19,7 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
         {
             this.expenses= expenses;   
         }
-
+            
         public float CalculatePrice()
         {
             float price = base.CalculatePrice();
@@ -27,9 +27,9 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
             foreach(var expense in expenses)
             {
                 totalExpensesAmount += expense.GetExpense(product.price);
-                totalExpensesAmount.Round(2);
+                totalExpensesAmount = totalExpensesAmount.Round(2);
             }
-
+            
             return (price + totalExpensesAmount).Round(2);
         }
     }

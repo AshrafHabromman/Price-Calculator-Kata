@@ -48,6 +48,7 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
             float discountsAfterTax = CalculateDiscounts(price, false);
             this.totalDiscountAmount += discountsAfterTax;
             float finalPrice = price + taxAmount - discountsAfterTax;
+            Console.WriteLine(taxAmount);
             return finalPrice.Round(2);
         }
     }
