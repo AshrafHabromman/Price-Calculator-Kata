@@ -15,7 +15,7 @@ namespace Price_Calculator_Kata.ProductPrinter
         public ITax tax { get; set; }
         public List<IDiscount> discounts { get; set; }
 
-        public ProductPriceCalculatorWithTaxAndDiscounts productPriceCalculatorWithTaxAndDiscounts { get; set; }
+        public AdditiveProductPriceCalculatorWithTaxAndDiscounts productPriceCalculatorWithTaxAndDiscounts { get; set; }
 
         public ProductWithTaxAndDiscountsPrinter(IProduct product, ITax tax, List<IDiscount> discounts)
         {
@@ -24,7 +24,7 @@ namespace Price_Calculator_Kata.ProductPrinter
             this.discounts = discounts;
 
             productPriceCalculatorWithTaxAndDiscounts = 
-                new ProductPriceCalculatorWithTaxAndDiscounts(product, tax, discounts);
+                new AdditiveProductPriceCalculatorWithTaxAndDiscounts(product, tax, discounts);
         }
         public void PrintPrice()
         {

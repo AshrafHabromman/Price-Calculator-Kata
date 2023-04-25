@@ -18,7 +18,7 @@ namespace Price_Calculator_Kata.ProductPrinter
         public List<IDiscount> discounts { get; set; }
         public List<IExpense> expenses { get; set; }
 
-        public ProductPriceCalculatorWithTaxDiscountsAndExpenses productPriceCalculatorWithTaxDiscountsAndExpenses { get; set; }
+        public MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses productPriceCalculatorWithTaxDiscountsAndExpenses { get; set; }
 
         public ProductWithTaxDiscountsAndExpensesPrinter(IProduct product, ITax tax, 
             List<IDiscount> discounts, List<IExpense> expenses)
@@ -29,13 +29,13 @@ namespace Price_Calculator_Kata.ProductPrinter
             this.expenses = expenses;
 
             productPriceCalculatorWithTaxDiscountsAndExpenses = new
-                ProductPriceCalculatorWithTaxDiscountsAndExpenses(product, tax, discounts, expenses);
+                MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses(product, tax, discounts, expenses);
         }
 
         public void PrintPrice()
         {
             float price = product.price;
-
+            
             float totalPrice = productPriceCalculatorWithTaxDiscountsAndExpenses.CalculatePrice();
 
             Console.WriteLine($"Cost = {price:#.##}");

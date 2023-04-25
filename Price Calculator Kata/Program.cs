@@ -16,8 +16,8 @@ double discountPercentage = Convert.ToDouble(Console.ReadLine());
 ITax taxCalculator = new TaxCalculator((float)taxPercentage);
 
 float upcDiscount = 0.07f;
-IDiscount discount = new Discount((float)discountPercentage, true);
-IDiscount specialUPCDiscount = new SpecialUPCDiscount(1234, (float)upcDiscount, true);
+IDiscount discount = new Discount((float)discountPercentage, false);
+IDiscount specialUPCDiscount = new SpecialUPCDiscount(1234, (float)upcDiscount, false);
 
 IProduct product = new Product("Potato", 1234, 20.25f);
 

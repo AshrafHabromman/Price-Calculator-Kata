@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Price_Calculator_Kata.ProductPriceCalculator
 {
-    public class ProductPriceCalculatorWithTaxDiscountsAndExpenses : ProductPriceCalculatorWithTaxAndDiscounts,  IProductPriceCalculatorWithExpenses
+    public class AdditiveProductPriceCalculatorWithTaxDiscountsAndExpenses : AdditiveProductPriceCalculatorWithTaxAndDiscounts,  IProductPriceCalculatorWithExpenses
     {
 
         public List<IExpense> expenses { get; set; }
         public float totalExpensesAmount { get; set; }
 
-        public ProductPriceCalculatorWithTaxDiscountsAndExpenses(IProduct product, ITax tax, List<IDiscount> discounts, List<IExpense> expenses) : base(product, tax, discounts)
+        public AdditiveProductPriceCalculatorWithTaxDiscountsAndExpenses(IProduct product, ITax tax, List<IDiscount> discounts, List<IExpense> expenses) : base(product, tax, discounts)
         {
             this.expenses= expenses;   
         }

@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Price_Calculator_Kata.ProductPriceCalculator
 {
-    public class ProductPriceCalculatorWithTaxAndDiscounts : IProductPriceCalculatorWithTax, IProductPriceCalculatorWithDiscounts
+    public class AdditiveProductPriceCalculatorWithTaxAndDiscounts : IProductPriceCalculatorWithTax, 
+        IProductPriceCalculatorWithDiscounts
     {
         public IProduct product { get; set; }
         public ITax tax { get; set; }
         public List<IDiscount> discounts { get; set; }
         public float totalDiscountAmount { get; set; }
 
-        public ProductPriceCalculatorWithTaxAndDiscounts(IProduct product, ITax tax, List<IDiscount> discounts)
+        public AdditiveProductPriceCalculatorWithTaxAndDiscounts(IProduct product, ITax tax, List<IDiscount> discounts)
         {
             this.product = product;
             this.tax = tax;
@@ -48,7 +49,6 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
             float discountsAfterTax = CalculateDiscounts(price, false);
             this.totalDiscountAmount += discountsAfterTax;
             float finalPrice = price + taxAmount - discountsAfterTax;
-            Console.WriteLine(taxAmount);
             return finalPrice.Round(2);
         }
     }
