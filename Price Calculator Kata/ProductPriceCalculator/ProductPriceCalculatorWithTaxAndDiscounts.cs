@@ -13,12 +13,14 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
         public IProduct product { get; set; }
         public ITax tax { get; set; }
         public List<IDiscount> discounts { get; set; }
+        public float totalDiscountAmount { get; set; }
 
         public ProductPriceCalculatorWithTaxAndDiscounts(IProduct product, ITax tax, List<IDiscount> discounts)
         {
             this.product = product;
             this.tax = tax;
             this.discounts = discounts;
+            this.totalDiscountAmount = 0;
         }
 
         public float CalculateDiscounts(float price, bool isBefore)
@@ -31,7 +33,7 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
                         continue;
                 if (discounts[i].isBeforeTax == isBefore)
                 {
-                    discountsAmount += discounts[i].CalculateDiscount(product.price);
+                    discountsAmount += discounts[i].CalculateDiscount(price);
                 }
             }
             return discountsAmount.Round(2);
@@ -39,12 +41,12 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
         public float CalculatePrice()
         {
             float discountsBeforeTax = CalculateDiscounts(product.price, true);
-
+            this.totalDiscountAmount += discountsBeforeTax;
             float price = (product.price - discountsBeforeTax).Round(2);
             float taxAmount = tax.CalculateTax(price);
 
             float discountsAfterTax = CalculateDiscounts(price, false);
-
+            this.totalDiscountAmount += discountsAfterTax;
             float finalPrice = price + taxAmount - discountsAfterTax;
             return finalPrice.Round(2);
         }

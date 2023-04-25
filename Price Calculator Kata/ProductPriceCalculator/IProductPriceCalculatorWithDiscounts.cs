@@ -10,5 +10,6 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
     public interface IProductPriceCalculatorWithDiscounts : IProductPriceCalculator
     {
         public List<IDiscount> discounts { get; set; }
+        public float totalDiscountAmount { get; set; }
     }
 }
