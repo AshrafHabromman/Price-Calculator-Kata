@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Price_Calculator_Kata.Expenses
 {
-    internal interface IExpense
+    public interface IExpense
     {
+        public string description { get; set; }
+        public float GetExpense(float price);
     }
 }

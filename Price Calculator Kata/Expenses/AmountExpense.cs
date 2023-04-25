@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace Price_Calculator_Kata.Expenses
 {
-    internal class AmountExpense
+    public class AmountExpense : IExpense
     {
+        public string description { get; set; }
+        public float expenseAmount { get; set; }
+        public AmountExpense(string description, float expenseAmount) 
+        {
+            this.description = description;
+            this.expenseAmount = expenseAmount;
+        }
+
+        public float GetExpense(float price)
+        {
+            return expenseAmount.Round(2);
+        }
+
     }
 }

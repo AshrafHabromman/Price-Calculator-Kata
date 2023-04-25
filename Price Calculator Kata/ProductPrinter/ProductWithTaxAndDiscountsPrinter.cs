@@ -33,7 +33,7 @@ namespace Price_Calculator_Kata.ProductPrinter
             float totalPrice = productPriceCalculatorWithTaxAndDiscounts.CalculatePrice();
 
             Console.Write($"Price before = {price :#.##}, Price after = {totalPrice:#.##}\n");
-            Console.Write($"Total Discount: {productPriceCalculatorWithTaxAndDiscounts.totalDiscountAmount}");
+            Console.Write($"Total discount amount : {productPriceCalculatorWithTaxAndDiscounts.totalDiscountAmount}");
 
         }
     }
