@@ -1,4 +1,5 @@
-﻿using Price_Calculator_Kata.Discount;
+﻿using Price_Calculator_Kata.Cap;
+using Price_Calculator_Kata.Discount;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace Price_Calculator_Kata.ProductPrinter
     public interface IProductWithDiscountsPrinter : IProductPrinter
     {
         public List<IDiscount> discounts { get; set; }
-
+        public ICap cap { get; set; }
     }
 }

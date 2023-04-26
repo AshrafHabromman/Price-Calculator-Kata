@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace Price_Calculator_Kata.Cap
 {
-    internal class AmountCap
+    public class AmountCap : ICap
     {
+        public float capAmount { get; set; }
+
+        public AmountCap(float capAmount)
+        {
+            this.capAmount = capAmount;
+        }
+
+        public float GetFinalDiscountAmount(float discount, float price)
+        {
+            if (discount >= capAmount) 
+            {
+                return capAmount;
+            }
+            return discount;
+        }
     }
 }

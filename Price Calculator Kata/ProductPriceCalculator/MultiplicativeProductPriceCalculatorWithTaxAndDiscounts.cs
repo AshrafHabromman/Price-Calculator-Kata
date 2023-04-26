@@ -1,4 +1,5 @@
-﻿using Price_Calculator_Kata.Discount;
+﻿using Price_Calculator_Kata.Cap;
+using Price_Calculator_Kata.Discount;
 using Price_Calculator_Kata.Product;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,15 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
         public List<IDiscount> discounts { get; set; }
         public float totalDiscountAmount { get; set; }
 
-        public MultiplicativeProductPriceCalculatorWithTaxAndDiscounts(IProduct product, ITax tax, List<IDiscount> discounts)
+        public ICap cap { get; set; }
+
+        public MultiplicativeProductPriceCalculatorWithTaxAndDiscounts(IProduct product, ITax tax, List<IDiscount> discounts, ICap cap)
         {
             this.product = product;
             this.tax = tax;
             this.discounts = discounts;
             this.totalDiscountAmount = 0;
+            this.cap = cap;
         }
 
         public float CalculateDiscounts(float price, bool isBefore)
@@ -51,7 +55,10 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
 
             float discountsAfterTax = CalculateDiscounts(price, false);
             this.totalDiscountAmount += discountsAfterTax;
-            float finalPrice = price + taxAmount - discountsAfterTax;
+
+            float finalDiscount = cap.GetFinalDiscountAmount(this.totalDiscountAmount, product.price);
+            this.totalDiscountAmount = finalDiscount;
+            float finalPrice = price + taxAmount - finalDiscount;
             return finalPrice.Round(2);
         }
     }

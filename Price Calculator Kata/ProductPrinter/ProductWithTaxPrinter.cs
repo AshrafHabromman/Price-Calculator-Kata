@@ -27,7 +27,7 @@ namespace Price_Calculator_Kata.ProductPrinter
 
             float finalPrice = productPriceCalculatorWithTax.CalculatePrice();
 
-            Console.Write($"Product price reported as ${productPriceCalculatorWithTax.product.price:#.##} before tax " +
+            Console.WriteLine($"Product price reported as ${productPriceCalculatorWithTax.product.price:#.##} before tax " +
                 $"and ${finalPrice:#.##} after {tax.taxPercentage * 100f}% tax.");
         }
     }

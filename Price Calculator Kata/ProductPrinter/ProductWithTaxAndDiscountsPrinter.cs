@@ -1,4 +1,5 @@
-﻿using Price_Calculator_Kata.Discount;
+﻿using Price_Calculator_Kata.Cap;
+using Price_Calculator_Kata.Discount;
 using Price_Calculator_Kata.Product;
 using Price_Calculator_Kata.ProductPriceCalculator;
 using System;
@@ -9,22 +10,23 @@ using System.Threading.Tasks;
 
 namespace Price_Calculator_Kata.ProductPrinter
 {
-    public class ProductWithTaxAndDiscountsPrinter : IProductWithTaxPrinter, IProductWithDiscountsPrinter
+    public class ProductWithTaxAndDiscountsPrinter : IProductWithTaxPrinter,
+        IProductWithDiscountsPrinter
     {
         public IProduct product { get; set; }
         public ITax tax { get; set; }
         public List<IDiscount> discounts { get; set; }
-
+        public ICap cap { get; set; }
         public AdditiveProductPriceCalculatorWithTaxAndDiscounts productPriceCalculatorWithTaxAndDiscounts { get; set; }
 
-        public ProductWithTaxAndDiscountsPrinter(IProduct product, ITax tax, List<IDiscount> discounts)
+        public ProductWithTaxAndDiscountsPrinter(IProduct product, ITax tax, List<IDiscount> discounts, ICap cap)
         {
             this.product =  product; 
             this.tax = tax;
             this.discounts = discounts;
-
+            this.cap = cap; 
             productPriceCalculatorWithTaxAndDiscounts = 
-                new AdditiveProductPriceCalculatorWithTaxAndDiscounts(product, tax, discounts);
+                new AdditiveProductPriceCalculatorWithTaxAndDiscounts(product, tax, discounts, cap);
         }
         public void PrintPrice()
         {
@@ -32,9 +34,10 @@ namespace Price_Calculator_Kata.ProductPrinter
 
             float totalPrice = productPriceCalculatorWithTaxAndDiscounts.CalculatePrice();
 
-            Console.Write($"Price before = {price :#.##}, Price after = {totalPrice:#.##}\n");
-            Console.Write($"Total discount amount : {productPriceCalculatorWithTaxAndDiscounts.totalDiscountAmount}");
-
+            Console.WriteLine($"Cost = {price:#.##}");
+            Console.WriteLine($"Tax = {tax.taxAmount}");
+            Console.WriteLine($"Discounts = {productPriceCalculatorWithTaxAndDiscounts.totalDiscountAmount}");
+            Console.WriteLine($"Total: {totalPrice}");
         }
     }
 }

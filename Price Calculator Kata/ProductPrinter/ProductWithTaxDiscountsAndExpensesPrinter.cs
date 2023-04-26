@@ -1,4 +1,5 @@
-﻿using Price_Calculator_Kata.Discount;
+﻿using Price_Calculator_Kata.Cap;
+using Price_Calculator_Kata.Discount;
 using Price_Calculator_Kata.Expenses;
 using Price_Calculator_Kata.Product;
 using Price_Calculator_Kata.ProductPriceCalculator;
@@ -17,19 +18,19 @@ namespace Price_Calculator_Kata.ProductPrinter
         public ITax tax { get; set; }
         public List<IDiscount> discounts { get; set; }
         public List<IExpense> expenses { get; set; }
-
+        public ICap cap { get; set; }
         public MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses productPriceCalculatorWithTaxDiscountsAndExpenses { get; set; }
 
         public ProductWithTaxDiscountsAndExpensesPrinter(IProduct product, ITax tax, 
-            List<IDiscount> discounts, List<IExpense> expenses)
+            List<IDiscount> discounts, ICap cap, List<IExpense> expenses)
         {
             this.product = product;
             this.tax = tax;
             this.discounts = discounts;
             this.expenses = expenses;
-
+            this.cap = cap; 
             productPriceCalculatorWithTaxDiscountsAndExpenses = new
-                MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses(product, tax, discounts, expenses);
+                MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses(product, tax, discounts, cap, expenses);
         }
 
         public void PrintPrice()
@@ -46,7 +47,7 @@ namespace Price_Calculator_Kata.ProductPrinter
                 Console.WriteLine($"{expense.description} cost = {expense.GetExpense(price)}");
             }
 
-            Console.Write($"Total: {totalPrice}");
+            Console.WriteLine($"Total: {totalPrice}");
 
         }
     }

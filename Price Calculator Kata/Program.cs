@@ -2,6 +2,7 @@
 
 // See https://aka.ms/new-console-template for more information
 using Price_Calculator_Kata;
+using Price_Calculator_Kata.Cap;
 using Price_Calculator_Kata.Discount;
 using Price_Calculator_Kata.Expenses;
 using Price_Calculator_Kata.Product;
@@ -34,6 +35,31 @@ List<IExpense> expenses = new List<IExpense>
     packaging,
     transport
 };
-IProductPrinter productPrinter = new ProductWithTaxDiscountsAndExpensesPrinter(product, taxCalculator, discounts, expenses);
+
+ICap percentageCap = new PercentageCap(0.20f);
+
+IProductPrinter productPrinter = new
+    ProductWithTaxAndDiscountsPrinter(product,
+    taxCalculator, discounts, percentageCap);
 
 productPrinter.PrintPrice();
+
+Console.WriteLine();
+
+ICap amountCap = new AmountCap(4.0f);
+
+IProductPrinter productPrinter1 = new
+    ProductWithTaxAndDiscountsPrinter(product,
+    taxCalculator, discounts, amountCap);
+
+productPrinter1.PrintPrice();
+
+Console.WriteLine();
+
+((PercentageCap)percentageCap).capPercentage = 0.30f;
+
+IProductPrinter productPrinter2 = new
+    ProductWithTaxAndDiscountsPrinter(product,
+    taxCalculator, discounts, percentageCap);
+
+productPrinter2.PrintPrice();
