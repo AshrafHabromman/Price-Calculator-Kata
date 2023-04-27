@@ -17,7 +17,7 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
         public List<IExpense> expenses { get; set; }
         public float totalExpensesAmount { get; set; }
 
-        public MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses(IProduct product, ITax tax, List<IDiscount> discounts, ICap cap, List<IExpense> expenses) : base(product, tax, discounts,cap)
+        public MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses(IProduct product,string currency, ITax tax, List<IDiscount> discounts, ICap cap, List<IExpense> expenses) : base(product, currency, tax, discounts,cap)
         {
             this.expenses = expenses;
         }

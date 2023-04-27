@@ -14,19 +14,21 @@ namespace Price_Calculator_Kata.ProductPrinter
         IProductWithDiscountsPrinter
     {
         public IProduct product { get; set; }
+        public string currency { get; set; }
         public ITax tax { get; set; }
         public List<IDiscount> discounts { get; set; }
         public ICap cap { get; set; }
         public AdditiveProductPriceCalculatorWithTaxAndDiscounts productPriceCalculatorWithTaxAndDiscounts { get; set; }
 
-        public ProductWithTaxAndDiscountsPrinter(IProduct product, ITax tax, List<IDiscount> discounts, ICap cap)
+        public ProductWithTaxAndDiscountsPrinter(IProduct product, string currency, ITax tax, List<IDiscount> discounts, ICap cap)
         {
-            this.product =  product; 
+            this.product =  product;
+            this.currency = currency;
             this.tax = tax;
             this.discounts = discounts;
             this.cap = cap; 
             productPriceCalculatorWithTaxAndDiscounts = 
-                new AdditiveProductPriceCalculatorWithTaxAndDiscounts(product, tax, discounts, cap);
+                new AdditiveProductPriceCalculatorWithTaxAndDiscounts(product,currency, tax, discounts, cap);
         }
         public void PrintPrice()
         {
@@ -34,10 +36,10 @@ namespace Price_Calculator_Kata.ProductPrinter
 
             float totalPrice = productPriceCalculatorWithTaxAndDiscounts.CalculatePrice();
 
-            Console.WriteLine($"Cost = {price:#.##}");
-            Console.WriteLine($"Tax = {tax.taxAmount}");
-            Console.WriteLine($"Discounts = {productPriceCalculatorWithTaxAndDiscounts.totalDiscountAmount}");
-            Console.WriteLine($"Total: {totalPrice}");
+            Console.WriteLine($"Cost = {price:#.##} {this.currency}");
+            Console.WriteLine($"Tax = {tax.taxAmount} {this.currency}");
+            Console.WriteLine($"Discounts = {productPriceCalculatorWithTaxAndDiscounts.totalDiscountAmount} {this.currency}");
+            Console.WriteLine($"Total: {totalPrice} {this.currency}");
         }
     }
 }

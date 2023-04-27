@@ -2,6 +2,7 @@
 using Price_Calculator_Kata.ProductPriceCalculator;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,10 +28,12 @@ namespace Price_Calculator_Kata.ProductPrinter
         public void PrintPrice()
         {
 
-            float finalPrice = productPriceCalculatorWithTax.CalculatePrice();
+            float totalPrice = productPriceCalculatorWithTax.CalculatePrice();
 
-            Console.WriteLine($"Product price reported as ${productPriceCalculatorWithTax.product.price:#.##} {this.currency} before tax " +
-                $"and ${finalPrice:#.##} {this.currency} after {tax.taxPercentage * 100f}% tax.");
+            Console.WriteLine($"Cost = {product.price:#.##} {this.currency}");
+            Console.WriteLine($"Tax = {tax.taxAmount} {this.currency}");
+            Console.WriteLine($"Total: {totalPrice} {this.currency}");
+
         }
     }
 }

@@ -26,12 +26,13 @@ namespace Price_Calculator_Kata.ProductPrinter
             List<IDiscount> discounts, ICap cap, List<IExpense> expenses)
         {
             this.product = product;
+            this.currency = currency;  
             this.tax = tax;
             this.discounts = discounts;
             this.expenses = expenses;
             this.cap = cap; 
             productPriceCalculatorWithTaxDiscountsAndExpenses = new
-                MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses(product, tax, discounts, cap, expenses);
+                MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses(product, currency, tax, discounts, cap, expenses);
         }
 
         public void PrintPrice()
@@ -40,15 +41,15 @@ namespace Price_Calculator_Kata.ProductPrinter
             
             float totalPrice = productPriceCalculatorWithTaxDiscountsAndExpenses.CalculatePrice();
 
-            Console.WriteLine($"Cost = {price:#.##}");
-            Console.WriteLine($"Tax = {tax.taxAmount}");
-            Console.WriteLine($"Discounts = {productPriceCalculatorWithTaxDiscountsAndExpenses.totalDiscountAmount}");
+            Console.WriteLine($"Cost = {price:#.##} {this.currency}");
+            Console.WriteLine($"Tax = {tax.taxAmount} {this.currency}");
+            Console.WriteLine($"Discounts = {productPriceCalculatorWithTaxDiscountsAndExpenses.totalDiscountAmount} {this.currency}");
             foreach(var expense in expenses)
             {
-                Console.WriteLine($"{expense.description} cost = {expense.GetExpense(price)}");
+                Console.WriteLine($"{expense.description} cost = {expense.GetExpense(price)} {this.currency}");
             }
 
-            Console.WriteLine($"Total: {totalPrice}");
+            Console.WriteLine($"Total: {totalPrice} {this.currency}");
 
         }
     }
