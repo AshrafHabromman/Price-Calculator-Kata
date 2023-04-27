@@ -13,15 +13,17 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
         IProductPriceCalculatorWithDiscounts
     {
         public IProduct product { get; set; }
+        public string currency { get; set; }
         public ITax tax { get; set; }
         public List<IDiscount> discounts { get; set; }
         public float totalDiscountAmount { get; set; }
 
         public ICap cap { get; set; }
 
-        public MultiplicativeProductPriceCalculatorWithTaxAndDiscounts(IProduct product, ITax tax, List<IDiscount> discounts, ICap cap)
+        public MultiplicativeProductPriceCalculatorWithTaxAndDiscounts(IProduct product, string currency, ITax tax, List<IDiscount> discounts, ICap cap)
         {
             this.product = product;
+            this.currency = currency;
             this.tax = tax;
             this.discounts = discounts;
             this.totalDiscountAmount = 0;

@@ -18,13 +18,10 @@ namespace Price_Calculator_Kata.Cap
         public float GetFinalDiscountAmount(float discount, float price)
         {
             float capAmount = price * capPercentage;
-            Console.WriteLine(discount);
             if (discount >= capAmount)
             {
-                Console.WriteLine(capAmount);
                 return capAmount;
             }
-            Console.WriteLine($"Hii {capAmount}");
             return discount;
         }
     }

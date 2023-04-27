@@ -15,13 +15,14 @@ namespace Price_Calculator_Kata.ProductPrinter
         IProductWithDiscountsPrinter, IProductWithExpensesPrinter
     {
         public IProduct product { get; set; }
+        public string currency { get; set; }
         public ITax tax { get; set; }
         public List<IDiscount> discounts { get; set; }
         public List<IExpense> expenses { get; set; }
         public ICap cap { get; set; }
         public MultiplicativeProductPriceCalculatorWithTaxDiscountsAndExpenses productPriceCalculatorWithTaxDiscountsAndExpenses { get; set; }
 
-        public ProductWithTaxDiscountsAndExpensesPrinter(IProduct product, ITax tax, 
+        public ProductWithTaxDiscountsAndExpensesPrinter(IProduct product, string currency, ITax tax, 
             List<IDiscount> discounts, ICap cap, List<IExpense> expenses)
         {
             this.product = product;

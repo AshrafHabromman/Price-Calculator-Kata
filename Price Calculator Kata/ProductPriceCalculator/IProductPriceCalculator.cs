@@ -5,8 +5,9 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
 {
     public interface IProductPriceCalculator
     {
-        IProduct product { get; set; }
+        public IProduct product { get; set; }
 
+        public string currency { get; set; }
         public float CalculatePrice();
 
     }

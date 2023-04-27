@@ -11,15 +11,17 @@ namespace Price_Calculator_Kata.ProductPrinter
     public class ProductWithTaxPrinter : IProductWithTaxPrinter
     {
         public IProduct product { get; set; }
+        public string currency { get; set; }
         public ITax tax { get; set; }
         public IProductPriceCalculatorWithTax productPriceCalculatorWithTax { get; set; }
 
-        public ProductWithTaxPrinter(IProduct product, ITax tax)
+        public ProductWithTaxPrinter(IProduct product, string currency, ITax tax)
         {
             this.product  = product;
+            this.currency= currency;
             this.tax = tax;
 
-            this.productPriceCalculatorWithTax = new ProductPriceCalculatorWithTax(product, tax);
+            this.productPriceCalculatorWithTax = new ProductPriceCalculatorWithTax(product, currency, tax);
         }
 
         public void PrintPrice()
@@ -27,8 +29,8 @@ namespace Price_Calculator_Kata.ProductPrinter
 
             float finalPrice = productPriceCalculatorWithTax.CalculatePrice();
 
-            Console.WriteLine($"Product price reported as ${productPriceCalculatorWithTax.product.price:#.##} before tax " +
-                $"and ${finalPrice:#.##} after {tax.taxPercentage * 100f}% tax.");
+            Console.WriteLine($"Product price reported as ${productPriceCalculatorWithTax.product.price:#.##} {this.currency} before tax " +
+                $"and ${finalPrice:#.##} {this.currency} after {tax.taxPercentage * 100f}% tax.");
         }
     }
 }
