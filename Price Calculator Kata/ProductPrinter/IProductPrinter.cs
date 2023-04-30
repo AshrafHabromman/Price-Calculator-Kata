@@ -7,6 +7,7 @@ namespace Price_Calculator_Kata.ProductPrinter
     {
         IProduct product { get; set; }
         public string currency { get; set; }
+        public int printingPrecision { get; set; }
         void PrintPrice();
     }
 }

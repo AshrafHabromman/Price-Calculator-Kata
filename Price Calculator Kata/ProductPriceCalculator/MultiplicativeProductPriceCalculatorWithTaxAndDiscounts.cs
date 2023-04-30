@@ -14,13 +14,14 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
     {
         public IProduct product { get; set; }
         public string currency { get; set; }
+        public int precision { get; set; }
         public ITax tax { get; set; }
         public List<IDiscount> discounts { get; set; }
         public float totalDiscountAmount { get; set; }
 
         public ICap cap { get; set; }
 
-        public MultiplicativeProductPriceCalculatorWithTaxAndDiscounts(IProduct product, string currency, ITax tax, List<IDiscount> discounts, ICap cap)
+        public MultiplicativeProductPriceCalculatorWithTaxAndDiscounts(IProduct product, string currency, ITax tax, List<IDiscount> discounts, ICap cap, int precision)
         {
             this.product = product;
             this.currency = currency;
@@ -28,6 +29,7 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
             this.discounts = discounts;
             this.totalDiscountAmount = 0;
             this.cap = cap;
+            this.precision = precision;
         }
 
         public float CalculateDiscounts(float price, bool isBefore)
@@ -41,27 +43,29 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
                         continue;
                 if (discounts[i].isBeforeTax == isBefore)
                 {
-                    float discount = discounts[i].CalculateDiscount(usedPrice);
+                    float discount = discounts[i].CalculateDiscount(usedPrice).Round(precision);
                     usedPrice -= discount;
                     discountsAmount += discount;
                 }
             }
-            return discountsAmount.Round(2);
+            return discountsAmount.Round(precision);
         }
         public float CalculatePrice()
         {
-            float discountsBeforeTax = CalculateDiscounts(product.price, true);
+            float discountsBeforeTax = CalculateDiscounts(product.price, true); 
             this.totalDiscountAmount += discountsBeforeTax;
-            float price = (product.price - discountsBeforeTax).Round(2);
-            float taxAmount = tax.CalculateTax(price);
+            float price = (product.price - discountsBeforeTax).Round(precision);
+            float taxAmount = tax.CalculateTax(price).Round(precision);
 
             float discountsAfterTax = CalculateDiscounts(price, false);
             this.totalDiscountAmount += discountsAfterTax;
 
-            float finalDiscount = cap.GetFinalDiscountAmount(this.totalDiscountAmount, product.price);
+            this.totalDiscountAmount = this.totalDiscountAmount.Round(precision);
+
+            float finalDiscount = cap.GetFinalDiscountAmount(this.totalDiscountAmount, product.price).Round(precision);
             this.totalDiscountAmount = finalDiscount;
             float finalPrice = price + taxAmount - finalDiscount;
-            return finalPrice.Round(2);
+            return finalPrice.Round(precision);
         }
     }
 }

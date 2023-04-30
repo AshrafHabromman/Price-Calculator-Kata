@@ -13,16 +13,19 @@ namespace Price_Calculator_Kata.ProductPrinter
     {
         public IProduct product { get; set; }
         public string currency { get; set; }
+        public int printingPrecision { get; set; }
         public ITax tax { get; set; }
         public IProductPriceCalculatorWithTax productPriceCalculatorWithTax { get; set; }
 
-        public ProductWithTaxPrinter(IProduct product, string currency, ITax tax)
+        public ProductWithTaxPrinter(IProduct product, string currency, ITax tax,
+            int precision, int printingPrecision)
         {
             this.product  = product;
             this.currency= currency;
             this.tax = tax;
-
-            this.productPriceCalculatorWithTax = new ProductPriceCalculatorWithTax(product, currency, tax);
+            this.printingPrecision = printingPrecision;
+            this.productPriceCalculatorWithTax = new ProductPriceCalculatorWithTax(product,
+                currency, tax, precision);
         }
 
         public void PrintPrice()
@@ -30,9 +33,9 @@ namespace Price_Calculator_Kata.ProductPrinter
 
             float totalPrice = productPriceCalculatorWithTax.CalculatePrice();
 
-            Console.WriteLine($"Cost = {product.price:#.##} {this.currency}");
-            Console.WriteLine($"Tax = {tax.taxAmount} {this.currency}");
-            Console.WriteLine($"Total: {totalPrice} {this.currency}");
+            Console.WriteLine($"Cost = {product.price.Round(printingPrecision):#.##} {this.currency}");
+            Console.WriteLine($"Tax = {tax.taxAmount.Round(printingPrecision)} {this.currency}");
+            Console.WriteLine($"Total: {totalPrice.Round(printingPrecision)} {this.currency}");
 
         }
     }

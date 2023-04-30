@@ -12,7 +12,7 @@ namespace Price_Calculator_Kata.Tax
 
         public float CalculateTax(float price) 
         {
-            this.taxAmount = (this.taxPercentage * price).Round(2);
+            this.taxAmount = this.taxPercentage * price;
             return this.taxAmount;
         }  
     }

@@ -24,8 +24,9 @@ namespace Price_Calculator_Kata.ProductPriceCalculator
 
         public float CalculatePrice()
         {
-            float price = product.price; 
-            return tax.CalculateTax(price) + price;
+            float price = product.price;
+            float taxAmount = tax.CalculateTax(price).Round(precision);
+            return (taxAmount + price).Round(precision);
         }
     }
 }

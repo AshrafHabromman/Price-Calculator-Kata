@@ -18,7 +18,7 @@ namespace Price_Calculator_Kata.Expenses
 
         public float GetExpense(float price)
         {
-            return expenseAmount.Round(2);
+            return expenseAmount;
         }
 
     }
